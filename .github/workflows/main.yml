@@ -74,11 +74,12 @@ jobs:
        run: |
           sshpass -p ${{secrets.SSH_PASSWORD}} ssh -o StrictHostKeyChecking=no ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}} "
           
-          docker-compose down
-          docker rmi ${{secrets.DOCKER_USERNAME}}/${{secrets.DOCKER_IMAGE}} || true
+          docker stop ${{secrets.DOCKER_IMAGE}}:${IMAGE_TAG} || true
+          docker rm ${{secrets.DOCKER_IMAGE}}${IMAGE_TAG} || true
+          docker rmi ${{secrets.DOCKER_USERNAME}}/${{secrets.DOCKER_IMAGE}}:${IMAGE_TAG} || true
           
-          docker pull ${{secrets.DOCKER_USERNAME}}/${{secrets.DOCKER_IMAGE}}:latest
-          docker-compose up
+          docker pull ${{secrets.DOCKER_USERNAME}}/${{secrets.DOCKER_IMAGE}}:${IMAGE_TAG}
+          docker run -d -p ${ODOO_PORT}:${DEFAULT_PORT} --name ${ODOO_CONTAINER_NAME} ${{secrets.DOCKER_USERNAME}}/${{secrets.DOCKER_IMAGE}}:${IMAGE_TAG}
           "
       # docker stop ${{secrets.DOCKER_IMAGE}}-backend-api || true
       # docker rm ${{secrets.DOCKER_IMAGE}}-backend-api || true
