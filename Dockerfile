@@ -29,6 +29,7 @@ RUN apt-get update \
 
 COPY ./entrypoint.sh /
 COPY ./odoo.conf /etc/odoo/
+COPY wait-for-psql.py /usr/local/bin/wait-for-psql.py
 
 RUN chmod +x /entrypoint.sh
 
@@ -37,6 +38,7 @@ RUN pip install wheel
 COPY requirements.txt /tmp/requirements.txt
 RUN pip install --no-cache-dir -r /tmp/requirements.txt && \
     rm /tmp/requirements.txt
+
 
 # Expose Odoo port
 EXPOSE 8069 8071 8072
