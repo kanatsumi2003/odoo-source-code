@@ -30,6 +30,7 @@ RUN apt-get update \
 WORKDIR $ODOO_HOME
 
 # Install Odoo dependencies
+COPY requirements.txt /
 RUN pip install -r requirements.txt
 
 # Expose Odoo port
