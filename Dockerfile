@@ -25,16 +25,10 @@ RUN apt-get update \
         unzip \
     && rm -rf /var/lib/apt/lists/*
 
-COPY ./entrypoint.sh /
-COPY ./odoo.conf /etc/odoo/
-COPY wait-for-psql.py /usr/local/bin/wait-for-psql.py
-RUN chmod +x /entrypoint.sh \
-    && chmod +x /usr/local/bin/wait-for-psql.py
 # Set working directory
 WORKDIR /app
 COPY . /app
 # Install Odoo dependencies
-COPY odoo-bin /opt/odoo/odoo-bin
 COPY requirements.txt /
 RUN pip install -r requirements.txt
 
@@ -42,6 +36,6 @@ RUN pip install -r requirements.txt
 EXPOSE 8069 8071 8072
 
 # Start Odoo
-# CMD ["python", "/app/odoo-bin", "-c", "odoo.conf"]
-ENTRYPOINT ["/entrypoint.sh"]
-CMD ["odoo"]
+CMD ["python", "/app/odoo-bin"]
+# ENTRYPOINT ["/entrypoint.sh"]
+# CMD ["odoo"]
