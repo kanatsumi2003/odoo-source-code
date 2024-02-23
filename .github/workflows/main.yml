@@ -79,7 +79,7 @@ jobs:
           docker rmi ${{secrets.DOCKER_USERNAME}}/${{secrets.DOCKER_IMAGE}}:${{vars.IMAGE_TAG}} || true
           
           docker pull ${{secrets.DOCKER_USERNAME}}/${{secrets.DOCKER_IMAGE}}:${{vars.IMAGE_TAG}}
-          docker run -d -p ${{vars.ODOO_PORT}}:${{vars.DEFAULT_PORT}} --name ${{vars.ODOO_CONTAINER_NAME}} --link odoo-postgre:db ${{secrets.DOCKER_USERNAME}}/${{secrets.DOCKER_IMAGE}}:${{vars.IMAGE_TAG}}
+          docker run -d -p ${{vars.ODOO_PORT}}:${{vars.DEFAULT_PORT}} --name ${{vars.ODOO_CONTAINER_NAME}} --link odoo-postgre:db --network odoo-network ${{secrets.DOCKER_USERNAME}}/${{secrets.DOCKER_IMAGE}}:${{vars.IMAGE_TAG}}
           "
       # docker stop ${{secrets.DOCKER_IMAGE}}-backend-api || true
       # docker rm ${{secrets.DOCKER_IMAGE}}-backend-api || true
