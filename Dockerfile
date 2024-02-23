@@ -28,10 +28,14 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Odoo requirements
-RUN pip install -r requirements.txt
+RUN pip install wheel
+COPY requirements.txt /tmp/requirements.txt
+RUN pip install --no-cache-dir -r /tmp/requirements.txt && \
+    rm /tmp/requirements.txt
 
 # Expose Odoo port
 EXPOSE 8069 8071 8072
 
 # Run Odoo
-CMD ["./odoo-bin"]
+# CMD ["./odoo-bin"]
+CMD ["python", "odoo-bin"]
