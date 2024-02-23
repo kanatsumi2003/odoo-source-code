@@ -68,36 +68,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Install sshpass
-      run: 'if ! command -v sshpass &> /dev/null; then sudo apt-get install -y sshpass; fi'
-
-    - name: Check if Docker containers are already running
-      id: check_running
-      run: |
-          sshpass -p ${{ secrets.SSH_PASSWORD }} ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "
-            if docker ps | grep -q '${ ODOO_CONTAINER_NAME }'; then
-              echo 'Containers are already running.'
-              exit 1
-            else
-              echo 'Containers are not running.'
-              exit 0
-            fi
-          "
-      continue-on-error: true
-
-    - name: Pull and run Docker image
-      if: steps.check_running.outcome == 'success'
-      run: |
-          sshpass -p ${{ secrets.SSH_PASSWORD }} ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "
-            docker-compose up -d
-          "
-
-    - name: Stop Docker containers
-      if: steps.check_running.outcome == 'failure'
-      run: |
-          sshpass -p ${{ secrets.SSH_PASSWORD }} ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "
-            docker-compose down
-            docker rmi ${{ secrets.DOCKER_IMAGE }}
+     - name: Install sshpass
+       run: 'if ! command -v sshpass &> /dev/null; then sudo apt-get install -y sshpass; fi'
+     - name: Pull and run Docker image
+       run: |
+          sshpass -p ${{secrets.SSH_PASSWORD}} ssh -o StrictHostKeyChecking=no ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}} "
+          
+          docker-compose down
+          docker rmi ${{secrets.DOCKER_USERNAME}}/${{secrets.DOCKER_IMAGE}} || true
+          
+          docker pull ${{secrets.DOCKER_USERNAME}}/${{secrets.DOCKER_IMAGE}}:latest
+          docker-compose up
           "
       # docker stop ${{secrets.DOCKER_IMAGE}}-backend-api || true
       # docker rm ${{secrets.DOCKER_IMAGE}}-backend-api || true
