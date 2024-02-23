@@ -36,6 +36,6 @@ RUN pip install -r requirements.txt
 EXPOSE 8069 8071 8072
 
 # Start Odoo
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["python", "/app/odoo-bin"]
-# ENTRYPOINT ["/entrypoint.sh"]
 # CMD ["odoo"]
