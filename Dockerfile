@@ -38,10 +38,10 @@ RUN chmod +x /entrypoint.sh \
     && chmod +x /etc/odoo/odoo.conf
 
 # Install Odoo requirements
-RUN pip install wheel
-COPY requirements.txt /tmp/requirements.txt
-RUN pip install --no-cache-dir -r /tmp/requirements.txt && \
-    rm /tmp/requirements.txt
+# RUN pip install wheel
+# COPY requirements.txt /tmp/requirements.txt
+# RUN pip install --no-cache-dir -r /tmp/requirements.txt && \
+#     rm /tmp/requirements.txt
 
 
 # Expose Odoo port
