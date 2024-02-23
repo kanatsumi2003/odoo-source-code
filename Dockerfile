@@ -113,7 +113,11 @@ COPY ./entrypoint.sh /
 COPY ./odoo.conf /etc/odoo/
 
 # Set permissions and Mount /var/lib/odoo to allow restoring filestore and /mnt/extra-addons for users addons
-
+# Install Odoo requirements
+RUN pip install wheel
+COPY requirements.txt /tmp/requirements.txt
+RUN pip install --no-cache-dir -r /tmp/requirements.txt && \
+    rm /tmp/requirements.txt
 # Expose Odoo services
 EXPOSE 8069 8071 8072
 
