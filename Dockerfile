@@ -30,6 +30,8 @@ RUN apt-get update \
 COPY ./entrypoint.sh /
 COPY ./odoo.conf /etc/odoo/
 
+RUN chmod +x /entrypoint.sh
+
 # Install Odoo requirements
 RUN pip install wheel
 COPY requirements.txt /tmp/requirements.txt
