@@ -43,5 +43,5 @@ EXPOSE 8069 8071 8072
 
 # Start Odoo
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["python", "/app/odoo-bin"]
+CMD ["python", "/app/odoo-bin", "c", "/odoo.conf"]
 # CMD ["odoo"]
