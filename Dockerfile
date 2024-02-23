@@ -28,13 +28,14 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 COPY ./entrypoint.sh /
-COPY ./odoo.conf /
-COPY wait-for-psql.py /
-ENV ODOO_RC /odoo.conf
+COPY ./odoo.conf /etc/odoo/
+COPY wait-for-psql.py /usr/local/bin/wait-for-psql.py
+ENV ODOO_RC /etc/odoo/odoo.conf
+COPY ./odoo.conf /etc/odoo/
 
 RUN chmod +x /entrypoint.sh \
-    && chmod +x /wait-for-psql.py \
-    && chmod +x /odoo.conf
+    && chmod +x /usr/local/bin/wait-for-psql.py \
+    && chmod +x /etc/odoo/odoo.conf
 
 # Install Odoo requirements
 # RUN pip install wheel
@@ -47,5 +48,5 @@ RUN chmod +x /entrypoint.sh \
 EXPOSE 8069 8071 8072
 
 # Run Odoo
-ENTRYPOINT ["/entrypoint.sh"]
-CMD ["odoo"]
+# ENTRYPOINT ["/entrypoint.sh"]
+CMD ["./odoo-bin"]
