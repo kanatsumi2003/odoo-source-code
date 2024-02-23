@@ -27,6 +27,9 @@ RUN apt-get update \
         git \
     && rm -rf /var/lib/apt/lists/*
 
+COPY ./entrypoint.sh /
+COPY ./odoo.conf /etc/odoo/
+
 # Install Odoo requirements
 RUN pip install wheel
 COPY requirements.txt /tmp/requirements.txt
