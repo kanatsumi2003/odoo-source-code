@@ -52,7 +52,7 @@
 # CMD ["./odoo-bin"]
 
 
-FROM debian:bullseye-slim
+FROM python:3.9-slim
 
 SHELL ["/bin/bash", "-xo", "pipefail", "-c"]
 
