@@ -16,7 +16,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install setuptools wheel
           pip install --upgrade pip setuptools
-          
+
       - name: Cache Python dependencies
         uses: actions/cache@v2
         with:
@@ -27,7 +27,7 @@ jobs:
 
       - name: Install Python dependenies
         run: |
-          pip install **/requirements.txt
+          pip install -r requirements.txt
 
       - name: Checkout repository
         uses: actions/checkout@v2
