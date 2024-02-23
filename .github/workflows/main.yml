@@ -74,8 +74,8 @@ jobs:
        run: |
           sshpass -p ${{secrets.SSH_PASSWORD}} ssh -o StrictHostKeyChecking=no ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}} "
           
-          docker stop ${{secrets.DOCKER_IMAGE}}:${{vars.IMAGE_TAG}} || true
-          docker rm ${{secrets.DOCKER_IMAGE}}:${{vars.IMAGE_TAG}} || true
+          docker stop ${{vars.ODOO_CONTAINER_NAME}} || true
+          docker rm ${{vars.ODOO_CONTAINER_NAME}} || true
           docker rmi ${{secrets.DOCKER_USERNAME}}/${{secrets.DOCKER_IMAGE}}:${{vars.IMAGE_TAG}} || true
           
           docker pull ${{secrets.DOCKER_USERNAME}}/${{secrets.DOCKER_IMAGE}}:${{vars.IMAGE_TAG}}
