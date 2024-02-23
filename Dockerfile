@@ -27,8 +27,8 @@ RUN apt-get update \
 
 
 # Set working directory
-WORKDIR $ODOO_HOME
-
+WORKDIR /app
+COPY . /app
 # Install Odoo dependencies
 COPY odoo-bin /opt/odoo/odoo-bin
 COPY requirements.txt /
@@ -38,4 +38,4 @@ RUN pip install -r requirements.txt
 EXPOSE 8069
 
 # Start Odoo
-CMD ["python3", "/opt/odoo/odoo-bin", "-c", "odoo.conf"]
+CMD ["python", "/app/odoo-bin", "-c", "odoo.conf"]
