@@ -37,4 +37,4 @@ RUN pip install -r requirements.txt
 EXPOSE 8069
 
 # Start Odoo
-CMD ["./odoo-bin", "-c", "odoo.conf"]
+CMD ["python3", "odoo-bin", "-c", "odoo.conf"]
