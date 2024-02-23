@@ -31,7 +31,8 @@ COPY ./entrypoint.sh /
 COPY ./odoo.conf /etc/odoo/
 COPY wait-for-psql.py /usr/local/bin/wait-for-psql.py
 
-RUN chmod +x /entrypoint.sh
+RUN chmod +x /entrypoint.sh \
+    && chmod +x /usr/local/bin/wait-for-psql.py
 
 # Install Odoo requirements
 RUN pip install wheel
