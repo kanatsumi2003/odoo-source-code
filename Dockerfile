@@ -1,9 +1,6 @@
 # Use the official Python image from Docker Hub
 FROM python:3.8-slim
 
-# Create Odoo user and directory
-RUN adduser --system --home $ODOO_HOME $ODOO_USER
-
 # Install system dependencies
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
