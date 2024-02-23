@@ -37,5 +37,5 @@ RUN pip install --no-cache-dir -r /tmp/requirements.txt && \
 EXPOSE 8069 8071 8072
 
 # Run Odoo
-# CMD ["./odoo-bin"]
-CMD ["python", "odoo-bin"]
+CMD ["./odoo-bin"]
+# CMD ["python", "odoo-bin"]
