@@ -37,7 +37,10 @@ RUN chmod +x /entrypoint.sh \
     && chmod +x /usr/local/bin/wait-for-psql.py \
     && chmod +x /etc/odoo/odoo.conf
 
-
+RUN chown odoo /etc/odoo/odoo.conf \
+    && mkdir -p /mnt/extra-addons \
+    && chown -R odoo /mnt/extra-addons
+VOLUME ["/var/lib/odoo", "/mnt/extra-addons"]
 # Install Odoo requirements
 RUN pip install wheel
 COPY requirements.txt /tmp/requirements.txt
