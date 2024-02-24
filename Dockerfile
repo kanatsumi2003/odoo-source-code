@@ -27,18 +27,17 @@ RUN apt-get update \
 
 COPY ./entrypoint.sh /
 COPY ./odoo.conf /etc/odoo/
+COPY setup/odoo /usr/bin/odoo
+COPY odoo-bin /opt/odoo/odoo-bin
 COPY wait-for-psql.py /usr/local/bin/wait-for-psql.py
+COPY requirements.txt /
 RUN chmod +x /entrypoint.sh \
     && chmod +x /usr/local/bin/wait-for-psql.py \
-    && chmod +x /usr/bin/${{secrets.DOCKER_IMAGE}} \
     && chmod +x /usr/bin/odoo
 # Set working directory
 WORKDIR /app
 COPY . /app
 # Install Odoo dependencies
-COPY odoo-bin /opt/odoo/odoo-bin
-COPY setup/odoo /usr/bin/odoo
-COPY requirements.txt /
 RUN pip install -r requirements.txt
 
 # Expose Odoo port
