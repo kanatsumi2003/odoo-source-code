@@ -29,7 +29,7 @@ COPY ./entrypoint.sh /
 COPY ./odoo.conf /etc/odoo/
 COPY setup/odoo /usr/bin/odoo
 COPY odoo-bin /opt/odoo/odoo-bin
-COPY wait-for-psql.py /usr/local/bin/wait-for-psql.py
+# COPY wait-for-psql.py /usr/local/bin/wait-for-psql.py
 COPY requirements.txt /
 RUN chmod +x /entrypoint.sh \
     && chmod +x /usr/local/bin/wait-for-psql.py \
