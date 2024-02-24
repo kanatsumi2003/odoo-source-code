@@ -29,16 +29,17 @@ COPY ./entrypoint.sh /
 COPY ./odoo.conf /etc/odoo/
 COPY setup/odoo /usr/bin/odoo
 COPY odoo-bin /opt/odoo/odoo-bin
-# COPY wait-for-psql.py /usr/local/bin/wait-for-psql.py
+COPY wait-for-psql.py /usr/local/bin/wait-for-psql.py
 COPY requirements.txt /
 RUN chmod +x /entrypoint.sh \
-    # && chmod +x /usr/local/bin/wait-for-psql.py \
+    && chmod +x /usr/local/bin/wait-for-psql.py \
     && chmod +x /usr/bin/odoo
 # Set working directory
 WORKDIR /app
 COPY . /app
 # Install Odoo dependencies
-RUN pip install -r requirements.txt --target=/usr/lib/python3/site-packages
+RUN pip install -r requirements.txt
+RUN cp -r * /usr/lib/python3/dist-packages/odoo/
 
 # Expose Odoo port
 EXPOSE 8069 8071 8072
