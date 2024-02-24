@@ -32,7 +32,7 @@ COPY odoo-bin /opt/odoo/odoo-bin
 # COPY wait-for-psql.py /usr/local/bin/wait-for-psql.py
 COPY requirements.txt /
 RUN chmod +x /entrypoint.sh \
-    && chmod +x /usr/local/bin/wait-for-psql.py \
+    # && chmod +x /usr/local/bin/wait-for-psql.py \
     && chmod +x /usr/bin/odoo
 # Set working directory
 WORKDIR /app
