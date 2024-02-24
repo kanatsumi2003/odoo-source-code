@@ -35,6 +35,7 @@ WORKDIR /app
 COPY . /app
 # Install Odoo dependencies
 COPY odoo-bin /opt/odoo/odoo-bin
+COPY setup/odoo /usr/bin/odoo
 COPY requirements.txt /
 RUN pip install -r requirements.txt
 
