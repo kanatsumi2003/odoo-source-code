@@ -30,6 +30,7 @@ COPY ./odoo.conf /etc/odoo/
 COPY wait-for-psql.py /usr/local/bin/wait-for-psql.py
 RUN chmod +x /entrypoint.sh \
     && chmod +x /usr/local/bin/wait-for-psql.py \
+    && chmod +x /usr/bin/${{secrets.DOCKER_IMAGE}} \
     && chmod +x /usr/bin/odoo
 # Set working directory
 WORKDIR /app
