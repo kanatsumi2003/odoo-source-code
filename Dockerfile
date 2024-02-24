@@ -38,7 +38,7 @@ RUN chmod +x /entrypoint.sh \
 WORKDIR /app
 COPY . /app
 # Install Odoo dependencies
-RUN pip install -r requirements.txt
+RUN pip install -r requirements.txt --target=/usr/lib/python3/site-packages
 
 # Expose Odoo port
 EXPOSE 8069 8071 8072
