@@ -40,6 +40,9 @@ COPY . /app
 # Install Odoo dependencies
 RUN pip install -r requirements.txt
 RUN pip install -r requirements.txt --target=/usr/lib/python3/dist-packages
+RUN mkdir -p /usr/lib/python3/dist-packages/odoo
+RUN chmod +x /usr/lib/python3/dist-packages/odoo
+RUN cp -r /app/* /usr/lib/python3/dist-packages/odoo/
 
 # Expose Odoo port
 EXPOSE 8069 8071 8072
