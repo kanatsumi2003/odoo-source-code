@@ -39,7 +39,7 @@ WORKDIR /app
 COPY . /app
 # Install Odoo dependencies
 RUN pip install -r requirements.txt
-RUN cp -r * /usr/lib/python3/dist-packages/odoo/
+RUN cp -r /app/* /usr/lib/python3/dist-packages/odoo/
 
 # Expose Odoo port
 EXPOSE 8069 8071 8072
