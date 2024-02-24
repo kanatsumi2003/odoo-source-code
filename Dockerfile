@@ -38,7 +38,6 @@ RUN chmod +x /entrypoint.sh \
 WORKDIR /app
 COPY . /app
 # Install Odoo dependencies
-RUN pip install -r requirements.txt
 RUN pip install -r requirements.txt --target=/usr/lib/python3/dist-packages
 RUN mkdir -p /usr/lib/python3/dist-packages/odoo
 RUN chmod +x /usr/lib/python3/dist-packages/odoo
