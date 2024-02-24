@@ -42,6 +42,8 @@ RUN pip install -r requirements.txt --target=/usr/lib/python3/dist-packages
 RUN mkdir -p /usr/lib/python3/dist-packages/odoo
 RUN chmod +x /usr/lib/python3/dist-packages/odoo
 RUN cp -r /app/odoo /usr/lib/python3/dist-packages/
+ENV PYTHONPATH="${PYTHONPATH}:/usr/lib/python3/dist-packages/"
+
 # Expose Odoo port
 EXPOSE 8069 8071 8072
 
