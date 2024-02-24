@@ -29,7 +29,8 @@ COPY ./entrypoint.sh /
 COPY ./odoo.conf /etc/odoo/
 COPY wait-for-psql.py /usr/local/bin/wait-for-psql.py
 RUN chmod +x /entrypoint.sh \
-    && chmod +x /usr/local/bin/wait-for-psql.py
+    && chmod +x /usr/local/bin/wait-for-psql.py \
+    && chmod +x /usr/bin/odoo
 # Set working directory
 WORKDIR /app
 COPY . /app
@@ -44,6 +45,6 @@ EXPOSE 8069 8071 8072
 
 # Start Odoo
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["python", "/app/odoo-bin"]
-# CMD ["odoo"]
+# CMD ["python", "/app/odoo-bin"]
+CMD ["odoo"]
 # , "-c", "odoo.conf"
