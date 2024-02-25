@@ -12,6 +12,9 @@ RUN apt-get update \
         libldap2-dev \
         libsasl2-dev \
         libssl-dev \
+        libjpeg-turbo8 \
+        libssl1.1 \
+        libxext6 \
         libjpeg-dev \
         zlib1g-dev \
         libfreetype6-dev \
