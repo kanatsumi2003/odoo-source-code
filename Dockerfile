@@ -48,7 +48,7 @@ ENV PYTHONPATH="${PYTHONPATH}:/usr/lib/python3/dist-packages/"
 EXPOSE 8069 8071 8072
 
 # Start Odoo
-ENTRYPOINT ["/entrypoint.sh"]
+# ENTRYPOINT ["/entrypoint.sh"]
 # CMD ["python", "/app/odoo-bin"]
 CMD ["odoo", "--config=/etc/odoo/odoo.conf" ]
 # , "-c", "odoo.conf"
