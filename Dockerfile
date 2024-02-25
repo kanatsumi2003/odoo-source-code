@@ -4,26 +4,43 @@ FROM python:3.8-slim
 # Install system dependencies
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-        git \
-        build-essential \
-        libpq-dev \
-        libxml2-dev \
-        libxslt1-dev \
-        libldap2-dev \
-        libsasl2-dev \
-        libssl-dev \
-        libjpeg-dev \
-        zlib1g-dev \
-        libfreetype6-dev \
-        liblcms2-dev \
-        libwebp-dev \
-        libtiff5-dev \
-        libopenjp2-7-dev \
-        libjpeg62-turbo-dev \
-        wget \
+         ca-certificates \
         curl \
-        unzip \
-    && rm -rf /var/lib/apt/lists/*
+        dirmngr \
+        fonts-noto-cjk \
+        gnupg \
+        libssl-dev \
+        node-less \
+        npm \
+        python3-magic \
+        python3-num2words \
+        python3-odf \
+        python3-pdfminer \
+        python3-pip \
+        python3-phonenumbers \
+        python3-pyldap \
+        python3-qrcode \
+        python3-renderpm \
+        python3-setuptools \
+        python3-slugify \
+        python3-vobject \
+        python3-watchdog \
+        python3-xlrd \
+        python3-xlwt \
+        xz-utils && \
+    if [ -z "${TARGETARCH}" ]; then \
+        TARGETARCH="$(dpkg --print-architecture)"; \
+    fi; \
+    WKHTMLTOPDF_ARCH=${TARGETARCH} && \
+    case ${TARGETARCH} in \
+    "amd64") WKHTMLTOPDF_ARCH=amd64 && WKHTMLTOPDF_SHA=9df8dd7b1e99782f1cfa19aca665969bbd9cc159  ;; \
+    "arm64")  WKHTMLTOPDF_SHA=58c84db46b11ba0e14abb77a32324b1c257f1f22  ;; \
+    "ppc64le" | "ppc64el") WKHTMLTOPDF_ARCH=ppc64el && WKHTMLTOPDF_SHA=7ed8f6dcedf5345a3dd4eeb58dc89704d862f9cd  ;; \
+    esac \
+    && curl -o wkhtmltox.deb -sSL https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.bullseye_${WKHTMLTOPDF_ARCH}.deb \
+    && echo ${WKHTMLTOPDF_SHA} wkhtmltox.deb | sha1sum -c - \
+    && apt-get install -y --no-install-recommends ./wkhtmltox.deb \
+    && rm -rf /var/lib/apt/lists/* wkhtmltox.deb
 
 COPY ./entrypoint.sh /
 COPY ./odoo.conf /etc/odoo/
