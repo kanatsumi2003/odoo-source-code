@@ -22,8 +22,7 @@ RUN apt-get update \
         libjpeg62-turbo-dev \
         wget \
         curl \
-        unzip \
-    && rm -rf /var/lib/apt/lists/* 
+        unzip 
 
 RUN apt-get update && \
     apt-get install -y wget && \
@@ -33,7 +32,7 @@ RUN apt-get update && \
     apt-get install -y xfonts-75dpi && \
     apt-get install -y xfonts-base && \
     apt-get clean
-    
+
 RUN wget -O wkhtmltox.deb https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.bionic_amd64.deb && \
     dpkg -i wkhtmltox.deb && \
     apt-get install -f && \
