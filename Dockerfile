@@ -4,25 +4,30 @@ FROM python:3.8-slim
 # Install system dependencies
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-        git \
-        build-essential \
-        libpq-dev \
-        libxml2-dev \
-        libxslt1-dev \
-        libldap2-dev \
-        libsasl2-dev \
-        libssl-dev \
-        libjpeg-dev \
-        zlib1g-dev \
-        libfreetype6-dev \
-        liblcms2-dev \
-        libwebp-dev \
-        libtiff5-dev \
-        libopenjp2-7-dev \
-        libjpeg62-turbo-dev \
-        wget \
+        ca-certificates \
         curl \
-        unzip \
+        dirmngr \
+        fonts-noto-cjk \
+        gnupg \
+        libssl-dev \
+        node-less \
+        npm \
+        python3-magic \
+        python3-num2words \
+        python3-odf \
+        python3-pdfminer \
+        python3-pip \
+        python3-phonenumbers \
+        python3-pyldap \
+        python3-qrcode \
+        python3-renderpm \
+        python3-setuptools \
+        python3-slugify \
+        python3-vobject \
+        python3-watchdog \
+        python3-xlrd \
+        python3-xlwt \
+        xz-utils && \
     && rm -rf /var/lib/apt/lists/* \
     WKHTMLTOPDF_ARCH=${TARGETARCH} && \
     case ${TARGETARCH} in \
