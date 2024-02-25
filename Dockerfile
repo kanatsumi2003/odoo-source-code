@@ -23,6 +23,13 @@ RUN apt-get update \
         wget \
         curl \
         unzip \
+        apt-get install -y wget && \
+        apt-get install -y openssl && \
+        apt-get install -y fontconfig && \
+        apt-get install -y libxrender1 && \
+        apt-get install -y xfonts-75dpi && \
+        apt-get install -y xfonts-base && \
+        apt-get clean \
     && rm -rf /var/lib/apt/lists/* 
 
 RUN wget -O wkhtmltox.deb https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.bionic_amd64.deb && \
