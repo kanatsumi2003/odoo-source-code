@@ -12,8 +12,6 @@ RUN apt-get update \
         libldap2-dev \
         libsasl2-dev \
         libssl-dev \
-        libjpeg-turbo8 \
-        libssl1.1 \
         libxext6 \
         libjpeg-dev \
         zlib1g-dev \
@@ -27,22 +25,6 @@ RUN apt-get update \
         curl \
         unzip 
 
-RUN apt-get update && \
-    apt-get install -y wget && \
-    apt-get install -y openssl && \
-    apt-get install -y fontconfig && \
-    apt-get install -y libxrender1 && \
-    apt-get install -y xfonts-75dpi && \
-    apt-get install -y xfonts-base && \
-    apt-get clean
-
-RUN wget -O wkhtmltox.deb https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.bionic_amd64.deb && \
-    dpkg -i wkhtmltox.deb && \
-    apt-get install -f && \
-    apt-get clean && \
-    rm wkhtmltox.deb
-
-    
 
 COPY ./entrypoint.sh /
 COPY ./odoo.conf /etc/odoo/
